@@ -1,0 +1,14 @@
+Write-Host "Bienvenue dans l'utilitaire de création d'utilisateur AD" -ForegroundColor Green
+$name= Read-Host -Prompt "Entrez votre nom de compte"
+$GivenName= Read-Host -Prompt "Entrez votre prenom"
+$Surname= Read-Host -Prompt "Entrez votre nom de famille"
+$Principal = Read-Host -Prompt "Entrez votre nom avec @nomdedomaine a la fin"
+$Path= Read-Host -Prompt "Entrez le nom du script"
+New-ADUser `
+    -Name "$name" `
+    -GivenName "$GivenName"`
+    -Surname "$Surname"`
+    -UserPrincipalName "$Principal"`
+    -AccountPassword (Read-Host -AsSecureString "Entrez votre mdp") `
+    -scriptPath "$Path"`
+    -Enabled $True
