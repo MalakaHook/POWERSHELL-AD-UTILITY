@@ -1,0 +1,36 @@
+Write-Host "Bienvenue dans l'utilitaire de création d'utilisateur AD créer par Francois-Xavier Bérard" -ForegroundColor Green
+
+
+<#
+ # Toute mes variables entrez par l'utilisateur
+#>
+$name= Read-Host -Prompt "Entrez votre nom de compte (Nom qui s'affichera dans votre liste d'utilisateur AD)"
+$GivenName= Read-Host -Prompt "Entrez votre prenom"
+$Surname= Read-Host -Prompt "Entrez votre nom de famille"
+$SAM= Read-Host -Prompt "Entrez SamAccountName (Non utilisé pour la connection)"
+$Principal = Read-Host -Prompt "Entrez votre UserPrincipalName avec @nomdedomaine a la fin. Exemple (berard@annexe.lan)"
+$Description = Read-Host -Prompt "Entrez une description ou laissez vide"
+$Path= Read-Host -Prompt "Entrez le nom du script de connection. Sinon, laisser vide"
+$ADGroup = Read-Host -Prompt "Ajoutez l'utilisateur dans un groupe ? Si oui,entrez le nom du groupe désiré sinon laisser vide"
+New-ADUser `
+    -Name "$name" `<#
+                    # Ceci est le nom du compte de l'utilisateur qui s'affichera dans la liste des utilisateurs AD
+                   #>
+                   
+    -GivenName "$GivenName"`
+    -Surname "$Surname"`
+	-SamAccountName "$SAM"`<#
+                    # Ceci est le nom utilisé par l'utilisateur pour se connecter sur son compte.
+                   #>
+    -UserPrincipalName "$Principal"`
+	-Description "$Description"`
+    -AccountPassword (Read-Host -AsSecureString "Entrez votre mdp") `
+    -scriptPath "$Path"`<#
+                    # Permet d'assigner un script de connexion a l'utilisateur
+                   #>
+	-PasswordNeverExpires:$true `
+    -PassThru | Enable-ADAccount
+	
+Add-ADGroupMember "$ADGroup" "$SAM"  <#
+                    # Ajoute l'utilisateur a un groupe du domaine si nécessaire
+                   #>
