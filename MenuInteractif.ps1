@@ -1,9 +1,9 @@
-﻿Write-Host "============= Powershell Utility=============="
-Write-Host "`t1. 'A' Créer un nouvel utilisateur AD"
-Write-Host "`t2. 'B' Supprimer un utilisateur AD"
-Write-Host "`t3. 'C Créer un groupe dans le AD"
-Write-Host "`t4. 'Q Quitter'"
-Write-Host "========================================================"
+Write-Host "=============Utilitaire Powershell==============" -ForegroundColor Green
+Write-Host "`t1. 'A' Créer un nouvel utilisateur AD"-ForegroundColor Yellow
+Write-Host "`t2. 'B' Supprimer un utilisateur AD" -ForegroundColor Yellow
+Write-Host "`t3. 'C' Créer un groupe dans le AD"-ForegroundColor Yellow
+Write-Host "`t4. 'Q' Quitter'"-ForegroundColor Red
+Write-Host "=====================F-X-B======================"-ForegroundColor Green
 $choice = Read-Host "`nFaite un choix"
 switch ($choice) {
    'A'{
