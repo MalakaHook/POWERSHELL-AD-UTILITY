@@ -1,9 +1,15 @@
-Write-Host "=============Utilitaire Powershell==============" -ForegroundColor Green
+Write-Host "==============Utilitaire Powershell==============" -ForegroundColor Green
 Write-Host "`t1. 'A' Créer un nouvel utilisateur AD"-ForegroundColor Yellow
 Write-Host "`t2. 'B' Supprimer un utilisateur AD" -ForegroundColor Yellow
 Write-Host "`t3. 'C' Créer un groupe dans le AD"-ForegroundColor Yellow
-Write-Host "`t4. 'Q' Quitter'"-ForegroundColor Red
-Write-Host "=====================F-X-B======================"-ForegroundColor Green
+Write-Host "`t4. 'D' Supprimer un groupe dans le AD"-ForegroundColor Yellow
+Write-Host "================Autres Utilitaires==============="-ForegroundColor Green
+Write-Host "`t5. 'E' Ouvrir sysdm.cpl AD"-ForegroundColor Yellow
+Write-Host "`t6. 'F' Ouvrir ncpa.cpl AD"-ForegroundColor Yellow
+Write-Host "`t7. 'G' Ouvrir  l'active directory AD"-ForegroundColor Yellow
+Write-Host "`t8. 'H' Ouvrir  le gestionnaire de serveur"-ForegroundColor Yellow
+Write-Host "======================F-X-B======================"-ForegroundColor Green
+Write-Host "`t9. 'Q' Quitter'"-ForegroundColor Red
 $choice = Read-Host "`nFaite un choix"
 switch ($choice) {
    'A'{
@@ -50,5 +56,23 @@ New-ADGroup `
 -GroupScope "$gpscope"`
 -Description "$description"
    }
+      'D'{
+	     Write-Host "Bienvenue dans l'utilitaire de suppression de groupe AD créer par Francois-Xavier Bérard" -ForegroundColor Red
+		 $groupdel= Read-Host -Prompt "Entrez le nom du groupe que vous désirez supprimer"
+	     Remove-ADGroup -Identity "$groupdel"
+		 }
+		   'E'{
+		   sysdm.cpl
+		    }
+			   'F'{
+			   ncpa.cpl
+		    }
+			   'G'{
+			   dsa.msc
+		    }
+			'H'{
+			   servermanager
+		    }
+			
    'Q'{Return}
 }
